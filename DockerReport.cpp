@@ -44,6 +44,15 @@ int main() {
             if (endname == endpc)
                 return 1;
             std::string name(pc, endname);
+            pc = endname;
+            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
+            if (*pc != ':')
+                return 1;
+            std::advance(pc, 1);
+            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
+            invalue = true;
+
+            // udate counters and version 
             if (name == "version") {
                 inversion = true;
             } else {
@@ -59,13 +68,6 @@ int main() {
                     ++opensuse_count;
                 }
             }
-            pc = endname;
-            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
-            if (*pc != ':')
-                return 1;
-            std::advance(pc, 1);
-            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
-            invalue = true;
         } else if (isValue(pc, invalue)) {
             // parse value
             auto endpc = buffer.cend();
