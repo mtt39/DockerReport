@@ -16,6 +16,8 @@
 #include <algorithm>
 #include <sstream>
 
+#include "yaml_parser.hpp"
+
 int main() {
     bool invalue = false;
     bool inversion = false;
@@ -30,12 +32,12 @@ int main() {
     std::ostringstream sstream;
     sstream << std::cin.rdbuf();
     std::string buffer = sstream.str();
-    
+
     std::string::const_iterator pc = buffer.cbegin();
     while (true) {
         if (pc == buffer.cend()) {
             break;
-        } else if (!invalue && isalpha(*pc)) {
+        } else if (isKey(pc, invalue)) {
             // parse key
             auto endpc = buffer.cend();
             auto endname = std::find_if_not(pc, endpc, [] (char c) { return isalnum(c) || c == '_' || c == '.'; });
