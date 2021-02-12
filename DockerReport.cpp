@@ -36,8 +36,8 @@ int main() {
             break;
         } else if (!invalue && isalpha(*pc)) {
             // parse key
-            std::string::const_iterator endpc = buffer.cend();
-            std::string::const_iterator endname = std::find_if_not(pc, endpc, [] (char c) { return isalnum(c) || c == '_' || c == '.'; });
+            auto endpc = buffer.cend();
+            auto endname = std::find_if_not(pc, endpc, [] (char c) { return isalnum(c) || c == '_' || c == '.'; });
             if (endname == endpc)
                 return 1;
             std::string name(pc, endname);
@@ -65,11 +65,11 @@ int main() {
             invalue = true;
         } else if (invalue && (isalpha(*pc) || *pc == '"')) {
             // parse value
-            std::string::const_iterator endpc = buffer.cend();
+            auto endpc = buffer.cend();
             pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
             if (*pc == '"')
                 std::advance(pc, 1);
-            std::string::const_iterator valueend = std::find_if(pc, endpc, [] (char c) { return c == '"' || c == ' ' || c == '\n'; });
+            auto valueend = std::find_if(pc, endpc, [] (char c) { return c == '"' || c == ' ' || c == '\n'; });
             std::string value(pc, valueend);
             if (inversion) {
                 version = value;
