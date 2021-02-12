@@ -39,20 +39,10 @@ int main() {
             break;
         } else if (isKey(pc, invalue)) {
             // parse key
-            auto endpc = buffer.cend();
-            auto endname = std::find_if_not(pc, endpc, [] (char c) { return isalnum(c) || c == '_' || c == '.'; });
-            if (endname == endpc)
-                return 1;
-            std::string name(pc, endname);
-            pc = endname;
-            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
-            if (*pc != ':')
-                return 1;
-            std::advance(pc, 1);
-            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
-            invalue = true;
+            std::string name;
+            pc = parseKey(pc, buffer.cend(), name, invalue);
 
-            // udate counters and version 
+            // udate docker counters and version 
             if (name == "version") {
                 inversion = true;
             } else {
@@ -68,6 +58,7 @@ int main() {
                     ++opensuse_count;
                 }
             }
+
         } else if (isValue(pc, invalue)) {
             // parse value
             auto endpc = buffer.cend();
