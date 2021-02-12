@@ -66,7 +66,7 @@ int main() {
             std::advance(pc, 1);
             pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
             invalue = true;
-        } else if (invalue && (isalpha(*pc) || *pc == '"')) {
+        } else if (isValue(pc, invalue)) {
             // parse value
             auto endpc = buffer.cend();
             pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
