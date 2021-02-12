@@ -30,6 +30,7 @@ int main() {
     std::ostringstream sstream;
     sstream << std::cin.rdbuf();
     std::string buffer = sstream.str();
+    
     std::string::const_iterator pc = buffer.cbegin();
     while (true) {
         if (pc == buffer.cend()) {
