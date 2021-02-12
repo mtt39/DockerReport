@@ -9,11 +9,13 @@
     Limitations:
     * Much of YAML is not supported
 */
+
 #include <iostream>
 #include <iterator>
 #include <string>
 #include <algorithm>
 #include <sstream>
+
 int main() {
     bool invalue = false;
     bool inversion = false;
@@ -80,6 +82,7 @@ int main() {
             std::advance(pc, 1);
         }
     }
+
     std::cout << "# Docker Report: version " << version << '\n';
     std::cout << "| Platform | Count |\n";
     std::cout << "|:-----|-----:|\n";
@@ -88,5 +91,6 @@ int main() {
     std::cout << "| fedora | " << fedora_count << " |\n";
     std::cout << "| centos | " << centos_count << " |\n";
     std::cout << "| opensuse | " << opensuse_count << " |\n";
+
     return 0;
 }
