@@ -5,6 +5,8 @@
 */
 
 #include "yaml_parser.hpp"
+#include <algorithm>
+#include <iterator>
 
 // YAML parsing is at a key
 bool isKey(std::string::const_iterator pc, bool invalue){

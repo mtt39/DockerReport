@@ -11,9 +11,7 @@
 */
 
 #include <iostream>
-#include <iterator>
 #include <string>
-#include <algorithm>
 #include <sstream>
 
 #include "yaml_parser.hpp"
