@@ -67,15 +67,18 @@ int main() {
                 std::advance(pc, 1);
             auto valueend = std::find_if(pc, endpc, [] (char c) { return c == '"' || c == ' ' || c == '\n'; });
             std::string value(pc, valueend);
-            if (inversion) {
-                version = value;
-                inversion = false;
-            }
             pc = valueend;
             if (*pc == '"')
                 std::advance(pc, 1);
             pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
             invalue = false;
+
+            // save the version value
+            if (inversion) {
+                version = value;
+                inversion = false;
+            }
+
         } else {
             std::advance(pc, 1);
         }
