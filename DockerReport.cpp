@@ -61,17 +61,8 @@ int main() {
 
         } else if (isValue(pc, invalue)) {
             // parse value
-            auto endpc = buffer.cend();
-            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
-            if (*pc == '"')
-                std::advance(pc, 1);
-            auto valueend = std::find_if(pc, endpc, [] (char c) { return c == '"' || c == ' ' || c == '\n'; });
-            std::string value(pc, valueend);
-            pc = valueend;
-            if (*pc == '"')
-                std::advance(pc, 1);
-            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
-            invalue = false;
+            std::string value;
+            pc = parseValue(pc, buffer.cend(), value, invalue);
 
             // save the version value
             if (inversion) {
