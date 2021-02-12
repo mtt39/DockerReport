@@ -19,20 +19,21 @@
 #include "yaml_parser.hpp"
 
 int main() {
-    bool invalue = false;
+
+    std::string version;
     bool inversion = false;
     int key_count = 0;
     int ubuntu_count = 0;
     int fedora_count = 0;
     int centos_count = 0;
     int opensuse_count = 0;
-    std::string version;
 
     // imput complete file into a string
     std::ostringstream sstream;
     sstream << std::cin.rdbuf();
     std::string buffer = sstream.str();
 
+    bool invalue = false;
     std::string::const_iterator pc = buffer.cbegin();
     while (true) {
         if (pc == buffer.cend()) {
